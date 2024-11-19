@@ -1,0 +1,57 @@
+logging.level.org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+logging.level.org.springframework.web: TRACE
+logging.level.org.hibernate.SQL: DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+server:
+  port: '3030'
+  servlet:
+    context-path: /management/v1
+  error:
+    include-binding-errors: always
+    include-message: always
+management:
+  security:
+    enabled: false
+management.endpoints.web.exposure.include: "health,info"
+management.endpoint.health.show-details: always
+management.endpoint.health.probes.enabled: true
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  r2dbc:
+    url: "r2dbc:postgresql://localhost:5432/happy_learn?stringtype=unspecified"
+    username: postgres
+    password: iloveyou
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+#      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+    consumer:
+#      bootstrap-servers: localhost:9092
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+#      group-id: my-reactive-group
+
+authentication:
+  jwt:
+    public-key: MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAvQ8wZicsUmHvyP0jEPdt0ne7+jVHVouiWu9ltY89bfFcZGrJz5oXYci+SynXqkBWvbf7xS0FrSm1D7Tq9KAy4uhF/KzRbkFBZWlmjuZz5BgYERhw3GqiNCaGra0VmYVMZq17NxL8ahQ3gpIg5JFmYr7tORqGWiRncET+03xOaVr6w46xMBp/j8PQ1c8m73Qg3WpUpijmPeMu+7NBLB7rIjhfQJ2gQC7Z7Nt/Zd0tR5hp0uxm77SwQ7TEgT4xf8TVJ4M+o3GOtQZJ4zU6Yj9DgfEhWsxOtTikY8+n5n8eRuulWJWIBH4FrC5sya+RrQUvXWLbHZ+J1UV/1Bz6hDYTBg+ix00a9c1BziHH+3DI+yQpqvHFWLAdDg6/DB4IG/Bdw24vGjtHggF/UnEtF5hkpxpY2HrGsUShmHdPU93zc0hPGUAeIXIZXtZAVDbB7PuohaC44IyoncLc75tKSE6453d3o/q7lp4IvBKRbSmVRnwyliLPF2U/bhqU885Z72EAwlNg3jt5GEC9ZnQozUzL+Igp3eApdxXPWc4+nUCaN5L505nF3cvnbqSfKK+nJ//tfySNDMZSuQWsWwZkhxnpvw9Pgd7Z5d9pbTD/ItDbvzfXMvzpPMRK0X8Stl4IsmMf3yFg0Ov1YrawBxHZ9UePlYrbVi84Kdxf/1XS12ar1rsCAwEAAQ==
+    private-key: MIIJRAIBADANBgkqhkiG9w0BAQEFAASCCS4wggkqAgEAAoICAQC9DzBmJyxSYe/I/SMQ923Sd7v6NUdWi6Ja72W1jz1t8VxkasnPmhdhyL5LKdeqQFa9t/vFLQWtKbUPtOr0oDLi6EX8rNFuQUFlaWaO5nPkGBgRGHDcaqI0JoatrRWZhUxmrXs3EvxqFDeCkiDkkWZivu05GoZaJGdwRP7TfE5pWvrDjrEwGn+Pw9DVzybvdCDdalSmKOY94y77s0EsHusiOF9AnaBALtns239l3S1HmGnS7GbvtLBDtMSBPjF/xNUngz6jcY61BknjNTpiP0OB8SFazE61OKRjz6fmfx5G66VYlYgEfgWsLmzJr5GtBS9dYtsdn4nVRX/UHPqENhMGD6LHTRr1zUHOIcf7cMj7JCmq8cVYsB0ODr8MHggb8F3Dbi8aO0eCAX9ScS0XmGSnGljYesaxRKGYd09T3fNzSE8ZQB4hchle1kBUNsHs+6iFoLjgjKidwtzvm0pITrjnd3ej+ruWngi8EpFtKZVGfDKWIs8XZT9uGpTzzlnvYQDCU2DeO3kYQL1mdCjNTMv4iCnd4Cl3Fc9Zzj6dQJo3kvnTmcXdy+dupJ8or6cn/+1/JI0MxlK5BaxbBmSHGem/D0+B3tnl32ltMP8i0Nu/N9cy/Ok8xErRfxK2XgiyYx/fIWDQ6/VitrAHEdn1R4+VittWLzgp3F//VdLXZqvWuwIDAQABAoICAQCxsjsNaLhR3ldgE/0Hj2gbsApwi+83OxsoWWbBlZZpZbgvceepRu2/LM0fHH7mOH7O5sSveTeioFbcInHL516swyA088IM3Sy4Qq7wlU5MDxFf0BcUNO2sEqH3T33Dw/QhdeEfzKqOkd3yzaI48yjGmymgyHuK8jh+33qcEHQqtiaH8/A6hE1tNOFudLvlyMKzGaPiYQK3HHcmgD87VvwuN8nfk8fxS5fs9gnyFkbeyjR82VGO78fUe21PBMPFkZ2++66+NJerMfP0qCzt9wRed+Of0fQQhOKOJblr/gLZKddJQZKMll6CjUgW8Pv9Iah5H9dPKoqEeERDe9FCvwh0wz1z9pNsN6d2KXMLOKObD3+l6Qy1+6y0+A0Ysvw0Zu3AB3jw8o7QrmcL4MQ4eQYVWJibRedfIvkzoxYBqRrBUkf/zGBS2nWFer/NQ8Eshrz+1+Hjfz0d5spiOThx1tLXNA2oMbEAzJ9fEnvlZtqfQJZeX6IwhrzsH+q6xer12AGyIYH9GduaqKzU/R6F7PqdxEM5NofFXxKMqdTc/5+ufe45uKC8KHeGL/I1vz4+AUP6grBVZ0UHJOBYjv4SrRysipX6eHXn8gwu0FyFQyCsxozZxFmXmtR6bdlkNND7uzqGZ4BEzhXY8Qg30kHBSa9i47SJ+FDrYewDX9k7DiktsQKCAQEA+NvpYukyZ08IM7VJFLdNMj8NbJIDBlUpOLgKc1XVhxAxTCYk0358oflvE7Ruw3BzewXjHLcga48Fmu+e2ZlD1L1aQqZqYVcPac+WynzXI5XTWjh7Q7b4yP3vJvvKBeiqji8tOwBkgh8z2y0L7up740YGkfWRKuM5p5Xfucg6Kn+4EHCqMfoXvGIitOBii58PYnnBTyl1lX5pxieuw4WcBWasR/qFeOQwHP+iGvHDX/yALA1o7dLyZdgljoD856AveZUIes/dn+PV5Bt9eYaeQ5VOQIkOLpoXO2/ft5CHcKS7Kv0qnL5Ytk0cDt9IAfpyhuosNk8Pf86OXgcr4FA8FwKCAQEAwnv+/Ox89U5WpUv8/nkU2+uKV3tvwtrq02ipHGASg9vs/oOTKyAkS//U63KNqcd/l0DbBlNNz4ELnaL9QopmuL6H0nPnMl77i+d1pqjYIuyYmrtc/kRJFnaKiuMud71rZ5aHW+QuEit/P5Vru3xcQEdSyezy3qX4TOYuZtEt0L4fxJASrGyWwSb723Zi1/svfNfPyjUHO6Shv3yRF+mvJ3v/d+tcAoEeKkt5+VMqXChN/35msj7mOg83wcEr16xO8iN7qpssh6+L09yQzcL2ncGjf6SUza3ptR64PGdkVyNEmnkLGUjH5JHcQ6XjcXNFf0b6W5yCcMCIDQN0xKes/QKCAQEA3bGTDTFvXIcUaHQUQac11xBCljjRBwAws72IWczaZvLu58aHQf3Ja8Y4xNYVYng3+B17gGZHNGp59NeIrJKT0d5JnVyBImwbaAitbX+fbK0ZVqNAdEd5BBzrws/F3lOyNO4kHg6wexbu7E8J9XHgocwNKFQaWZmJEBk88FVGM/wJbmPfypvgL0tBXd8TCwzM+M48fpgRjvbJpeROFRJetpUL3yd3ZgXqMrssn1JG2aioShY8JrmohT/z3Spdor6Z7Hbu0fGBnuGp9wbiVbOuI8jLqEQwZSWSkrmMFAxmC9xEfPyBzJbpkqXI3BrfHBwPkM7mSg9OYG4TeAJtfOwdSwKCAQBS4vvCmZuMBK4i1qblYX9FVzZnoGD6X8iy/ykLwdpCPkncEwF24MT3avo4umKr2C2Frgtqv7gq1qm3rk5XvJqY5AMI64K+UgLNFoFq3Qz4nXNQhsfUShAINc9H8BjOyXjr9hiMTkxgTA94btsyVYcPkhYznvvHbl7Lj1J5WW84Rr9NS8XZnJIHkfDHEMaBnDkZ8PRLDpydi8Wv0YwY7+xJXKx9VF6rZpIPnolGfG5SRo8vc5SbJPmEBxZRSl3AFlyzD/JVvLqWvXdPfPJt70ih5XQkI2WT3yn6mjQU8k+uX4aOe0YCqaUfwhZo8ltj76fP3dU3lBV3rmaNfUqXwYqVAoIBAQDkeefU/oTiDUejny8GTeFesJmn0Lyk464zTgGkR+QmLG/DEaZq4Mt05BGoeSEn5R0C10P/qAV4C9czfwX85uuw0xH8OqlT6lprLOUcJS21HiNHzSZIm8vLH1WarLe+Etg1FnHIcIruji4s6QzCzVs13x7oMB3fAefvedeLL3boTvDhRmU413Btxq4LiLFivs+eDHAMiKZaA6eTzZrGcNhbPM91QJqEFmEVrOZRsHO3F5QLo4Gd8hqpC14M/eJQoQmJVMyGFySRl09znUbKj7m227gbWTall8BLY4bFGEQ3xkdgt6mFHn8e7jXFKN0o6+TD8k7jPFYg8lffa486Mibt
+
+kafka:
+  topic:
+    sync-person: dev.management.person
+  group:
+    sync-person: dev.management
+
+
+person-manager:
+  http:
+    baseUrl: http://localhost:3030
+
+
+

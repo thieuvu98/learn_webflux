@@ -1,0 +1,15 @@
+version: "3.3"
+
+services:
+  postgres:
+    image: postgres:13
+    ports:
+      - "15432:5432"
+    environment:
+      POSTGRES_DB: user_management
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: iloveyou3000
+    tmpfs:
+      - /var/lib/postgresql/data:rw
+    volumes:
+      - $MODULE_HOME/config/migration/db:/docker-entrypoint-initdb.d
